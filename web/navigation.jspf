@@ -1,0 +1,9 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1" trimDirectiveWhitespaces="true"%>
+<div class="nav">
+    <ul>
+        <li class="home"><a href="home.jsp">Home</a></li>
+        <li class="products"><a href="productspage.jsp">Latest Tech</a></li>
+        <li class="about"><a href="about.jsp">About</a></li>
+        <li class="contact"><a href="references.jsp">Contact</a></li>
+    </ul>
+</div>

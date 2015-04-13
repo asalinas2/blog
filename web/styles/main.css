@@ -1,0 +1,105 @@
+body {
+    margin: 0;
+    padding: 0;
+text-align: center;
+background: #fff;
+}
+@font-face{
+    font-family:"space";
+    src: url('space age.ttf') format("truetype");
+
+}
+.nav ul {
+    list-style: none;
+    background-color: rgb(0,85,178);
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+.nav li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #888;
+}
+
+.nav a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    transition: .3s background-color;
+}
+
+.nav a:hover {
+    background-color: rgb(255,163,3);
+}
+
+.nav a.active {
+    background-color: #fff;
+    color: #444;
+    cursor: default;
+}
+
+@media screen and (min-width: 600px) {
+    .nav li {
+        width: 120px;
+        border-bottom: none;
+        height: 50px;
+        line-height: 50px;
+        font-size: 1.4em;
+    }
+
+    /* Option 1 - Display Inline */
+    .nav li {
+        display: inline-block;
+        margin-right: -4px;
+    }
+
+}
+
+#hd {
+    padding: 1em;
+    margin-bottom: 0px;
+
+    /* Cross-browser gradient fill for the header */
+    background-image: linear-gradient(top, rgb(91,219,255) 5%, rgb(6,3,82) 100%, rgb(36,36,171) 100%);
+    background-image: -o-linear-gradient(top, rgb(91,219,255) 5%, rgb(6,3,82) 100%, rgb(36,36,171) 100%);
+    background-image: -moz-linear-gradient(top, rgb(91,219,255) 5%, rgb(6,3,82) 100%, rgb(36,36,171) 100%);
+    background-image: -webkit-linear-gradient(top, rgb(91,219,255) 5%, rgb(6,3,82) 100%, rgb(36,36,171) 100%);
+    background-image: -ms-linear-gradient(top, rgb(91,219,255) 5%, rgb(6,3,82) 100%, rgb(36,36,171) 100%);
+
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0.05, rgb(91,219,255)),
+        color-stop(1, rgb(6,3,82)),
+        color-stop(1, rgb(36,36,171))
+        );
+}
+
+table {
+margin-left: 43%;
+}
+
+#footer {
+    width:100%;
+    font-family: "space";
+    color: #fff;
+    text-align: center;
+    padding-top: 5px;
+    font-size: larger;
+    height:80px;
+    position:absolute;
+    bottom:0;
+    left:0;
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.05, rgb(91,219,255)),
+        color-stop(1, rgb(6,3,82)),
+        color-stop(1, rgb(36,36,171))
+        );
+}

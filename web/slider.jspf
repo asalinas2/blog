@@ -1,0 +1,38 @@
+<%@page contentType="text/html" pageEncoding="ISO-8859-1" trimDirectiveWhitespaces="true"%>
+<section>
+    <div id="icon-wrapper">
+        
+        <a class="nav" href="index?action=home">
+            <div class="icons">
+                <div class="icon-slide-container">
+                    <img class="slide-icon"  alt="View Profile" height="100" src="/ecommerce/images/profile.png">
+                </div>
+            </div>
+        </a>
+
+        <a class="nav" href="index?action=home">
+            <div class="icons2">
+                <div class="icon-slide-container">
+                    <img class="slide-icon"  alt="logout" height="100" src="/ecommerce/images/logout.png">
+                </div>
+            </div>
+        </a>
+        
+        <a class="nav" href="index?action=home">
+            <div class="icons3">
+                <div class="icon-slide-container">
+                    <img class="slide-icon"  alt="profile" height="100" src="/ecommerce/images/profile.png">
+                </div>
+            </div>
+        </a>
+
+        <a class="nav" href="index?action=logout">
+            <div class="icons4">
+                <div class="icon-slide-container">
+                    <img class="slide-icon"  alt="Logout" height="100" src="/ecommerce/images/logout.png">
+                </div>
+            </div>
+        </a>
+        
+    </div>
+</section>
