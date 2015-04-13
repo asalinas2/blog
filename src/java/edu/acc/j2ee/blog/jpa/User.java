@@ -34,7 +34,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 10)
+    @Size(min = 4, max = 10)
     @Column(name = "USERNAME",unique=true)
     private String username;
     @Basic(optional = false)

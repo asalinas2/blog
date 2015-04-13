@@ -57,7 +57,7 @@ public class Post implements Serializable {
     private List<Comment> commentList;
     @JoinColumn(name = "BLOGGER", referencedColumnName = "USERNAME")
     @ManyToOne(optional = false)
-    private Bloggerpass blogger;
+    private User blogger; //Bloggerpass
 
     public Post() {
     }
@@ -119,12 +119,12 @@ public class Post implements Serializable {
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
     }
-
-    public Bloggerpass getBlogger() {
+//Bloggerpass
+    public User getBlogger() {
         return blogger;
     }
-
-    public void setBlogger(Bloggerpass blogger) {
+//Bloggerpass
+    public void setBlogger(User blogger) {
         this.blogger = blogger;
     }
 
