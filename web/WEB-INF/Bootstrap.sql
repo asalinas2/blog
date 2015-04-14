@@ -39,7 +39,8 @@ CREATE TABLE POSTS (
 
 CREATE TABLE BLOGGERPASS (
     username VARCHAR(15) NOT NULL PRIMARY KEY,
-    password VARCHAR(15) NOT NULL
+    password VARCHAR(15) NOT NULL,
+    userid INT NOT NULL
 );
 
 CREATE TABLE BLOGGERROLES (
@@ -49,6 +50,7 @@ CREATE TABLE BLOGGERROLES (
     PRIMARY KEY (username, rolename)
 );
 
+ALTER TABLE BLOGGERPASS ADD FOREIGN KEY (userid) REFERENCES USERS (id) ON DELETE CASCADE;
 ALTER TABLE BLOGGERROLES ADD FOREIGN KEY (bloggerprofileid) REFERENCES PROFILES (id) ON DELETE CASCADE;
 ALTER TABLE COMMENTS ADD FOREIGN KEY (authorid) REFERENCES USERS (id) ON DELETE CASCADE;
 ALTER TABLE COMMENTS ADD FOREIGN KEY (postid) REFERENCES POSTS(id) ON DELETE CASCADE;
@@ -67,9 +69,9 @@ INSERT INTO USERS (username,password,profileid) VALUES
     ('charlie','password',3),
     ('alfonso','password',4),
     ('hubbub','password',5);
-INSERT INTO BLOGGERPASS (username,password) VALUES
-    ('alfonso', 'password'),
-    ('hubbub', 'password');
+INSERT INTO BLOGGERPASS (username,password,userid) VALUES
+    ('alfonso', 'password',4),
+    ('hubbub', 'password',5);
 INSERT INTO BLOGGERROLES (username,rolename,bloggerprofileid) VALUES
     ('alfonso', 'programmer',4),
     ('hubbub', 'blogger',5);

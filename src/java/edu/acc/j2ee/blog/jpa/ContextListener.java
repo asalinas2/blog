@@ -1,5 +1,6 @@
 package edu.acc.j2ee.blog.jpa;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.servlet.ServletContextEvent;
@@ -18,4 +19,5 @@ public class ContextListener implements ServletContextListener {
         EntityManagerFactory emf = (EntityManagerFactory)sce.getServletContext().getAttribute("emf");
         emf.close();
     }
+
 }

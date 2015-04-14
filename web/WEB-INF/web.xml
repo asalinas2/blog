@@ -9,6 +9,9 @@
     <servlet>
         <servlet-name>Controller</servlet-name>
         <servlet-class>edu.acc.j2ee.blog.jpa.Controller</servlet-class>
+        <multipart-config>
+            <max-file-size>204800</max-file-size>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controller</servlet-name>

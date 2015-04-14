@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -21,6 +23,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Bloggerpass.findByUsername", query = "SELECT b FROM Bloggerpass b WHERE b.username = :username"),
     @NamedQuery(name = "Bloggerpass.findByPassword", query = "SELECT b FROM Bloggerpass b WHERE b.password = :password")})
 public class Bloggerpass implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -35,7 +38,11 @@ public class Bloggerpass implements Serializable {
     private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "blogger")
     private List<Post> postList;
-
+    //////
+    @JoinColumn(name = "USERID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private User userid;
+///////
     public Bloggerpass() {
     }
 
@@ -71,7 +78,15 @@ public class Bloggerpass implements Serializable {
     public void setPostList(List<Post> postList) {
         this.postList = postList;
     }
+//////
+    public User getUserid() {
+        return userid;
+    }
 
+    public void setUserid(User userid) {
+        this.userid = userid;
+    }
+//////
     @Override
     public int hashCode() {
         int hash = 0;
@@ -96,5 +111,5 @@ public class Bloggerpass implements Serializable {
     public String toString() {
         return String.format("%s (%s)", username, password);
     }
-    
+
 }

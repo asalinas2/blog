@@ -6,7 +6,9 @@ import java.io.InputStream;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.Query;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -35,6 +37,7 @@ public class Controller extends HttpServlet {
                 break;
             case "comment":
                 destination = comment(request);
+                break;
             case "login":
                 destination = login(request);
                 break;
@@ -98,13 +101,13 @@ public class Controller extends HttpServlet {
     }
 
     private String home(HttpServletRequest request) throws ServletException {
-        EntityManager em = getEM();
-        try {
-            List<Post> posts = em.createNamedQuery("Post.findAll").getResultList();
-            request.setAttribute("posts", posts);
-        } catch (Exception e) {
-            request.setAttribute("flash", e.getMessage());
-        }
+//        EntityManager em = getEM();
+//        try {
+//            List<Post> posts = em.createNamedQuery("Post.findAll").getResultList();
+//            request.setAttribute("posts", posts);
+//        } catch (Exception e) {
+//            request.setAttribute("flash", e.getMessage());
+//        }
         return "home";
     }
 
@@ -281,80 +284,51 @@ public class Controller extends HttpServlet {
         }
     }
 
-    private EntityManager getEM() {
-        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
-        return emf.createEntityManager();
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 
     private String pUploadImage(HttpServletRequest request) throws ServletException, IOException {
-            if (request.getMethod().equals("GET")) {
-                return "upload";
-            }
-            final Part filePart = request.getPart("pic");
-            String filename = filePart.getSubmittedFileName();
-            String filetype = filePart.getContentType();
-            if (!filetype.contains("image")) {
-                request.setAttribute("flash", "The uploaded file is not an image!");
-                return "upload";
-            }
-            InputStream imgdata = filePart.getInputStream();
-            byte[] pixels = readImage(imgdata);
-            User user = (User) request.getSession().getAttribute("user");
-            Profile p = user.getProfileid();
-            p.setPicture(pixels);
-            p.setPictype(filetype);
-            EntityManager em = getEM();
-            try {
-                em.getTransaction().begin();
-                em.merge(p);
-                em.getTransaction().commit();
-            } catch (Exception e) {
-                request.setAttribute("flash", e.getMessage());
-                return "upload";
-            }
+        if (request.getMethod().equals("GET")) {
             return "upload";
         }
-
-    
+        final Part filePart = request.getPart("pic");
+        String filename = filePart.getSubmittedFileName();
+        String filetype = filePart.getContentType();
+        if (!filetype.contains("image")) {
+            request.setAttribute("flash", "The uploaded file is not an image!");
+            return "upload";
+        }
+        InputStream imgdata = filePart.getInputStream();
+        byte[] pixels = readImage(imgdata);
+        User user = (User) request.getSession().getAttribute("user");
+        Profile p = user.getProfileid();
+        p.setPicture(pixels);
+        p.setPictype(filetype);
+        EntityManager em = getEM();
+        try {
+            em.getTransaction().begin();
+            em.merge(p);
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            request.setAttribute("flash", e.getMessage());
+            return "upload";
+        }
+        return "upload";
+    }
 
     private void pImage(HttpServletRequest request, HttpServletResponse response) {
         String profileFor = request.getParameter("for");
@@ -401,6 +375,11 @@ public class Controller extends HttpServlet {
             return "comment";
         }
         return home(request);
+    }
+
+    private EntityManager getEM() {
+        EntityManagerFactory emf = (EntityManagerFactory) getServletContext().getAttribute("emf");
+        return emf.createEntityManager();
     }
 
 }
